@@ -9,6 +9,12 @@ parts_of_our_snake = []
 class Snake:
     def __init__(self):
         self.snake_parts = []
+        self.speed_snake = 20
+        self.create_snake()
+
+    def reset(self):
+        [part.reset() for part in self.snake_parts]
+        self.snake_parts = []
         self.create_snake()
 
     def create_snake(self):
