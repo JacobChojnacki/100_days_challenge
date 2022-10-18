@@ -39,21 +39,16 @@ def save_password():
                                                f"\nIs it ok to save?")
         if is_ok:
             try:
-                with open("passwords.txt", 'a') as file:
-                    file.write(f"Website: {website_input.get()}\n")
-                    file.write(f"Email/Username: {email_username_input.get()}\n")
-                    file.write(f"Password: {password_input.get()}\n")
-                    file.write("______________________________________________")
-                    website_input.delete(0, tkinter.END)
-                    password_input.delete(0, tkinter.END)
-            except:
-                with open("passwords.txt", "w") as file_new:
-                    file_new.write(f"Website: {website_input.get()}\n")
-                    file_new.write(f"Email/Username: {email_username_input.get()}\n")
-                    file_new.write(f"Password: {password_input.get()}\n")
-                    file.write("______________________________________________")
-                    website_input.delete(0, len(website_input.get()))
-                    password_input.delete(0, len(password_input.get()))
+                file = open("passwords.txt", 'a')
+            except FileNotFoundError:
+                file = open("passwords.txt", "w")
+            finally:
+                file.write(f"Website: {website_input.get()}\n")
+                file.write(f"Email/Username: {email_username_input.get()}\n")
+                file.write(f"Password: {password_input.get()}\n")
+                file.write("______________________________________________")
+                website_input.delete(0, tkinter.END)
+                password_input.delete(0, tkinter.END)
     else:
         messagebox.showinfo(message="Please don't leave any fields empty")
 
@@ -61,7 +56,7 @@ def save_password():
 # ---------------------------- UI SETUP ------------------------------- #
 window = tkinter.Tk()
 window.title("Password Manager")
-window.config(padx=50, pady=50)
+window.config(padx=25, pady=25)
 
 # canvas
 canvas = tkinter.Canvas(width=200, height=200)
