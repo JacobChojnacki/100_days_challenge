@@ -32,13 +32,26 @@ class UI:
         self.window.mainloop()
 
     def get_next_question(self):
-        q_text = self.quiz.next_question()
-        self.canvas.itemconfig(self.question, text=q_text)
-
+        self.canvas.config(bg="#FFF")
+        if self.quiz.still_has_questions():
+            self.score_label.config(text=f"Score: {self.quiz.score}/{len(self.quiz.question_list)}")
+            q_text = self.quiz.next_question()
+            self.canvas.itemconfig(self.question, text=q_text)
+        else:
+            self.canvas.itemconfig(self.question, text="END")
+            self.agree_btn.config(state="disabled")
+            self.disagree_btn.config(state="disabled")
     def good_answer(self):
-        self.quiz.check_answer("True")
-        self.get_next_question()
+        answer = self.quiz.check_answer("True")
+        self.feedback(answer)
 
     def false_answer(self):
-        self.quiz.check_answer("False")
-        self.get_next_question()
+        answer = self.quiz.check_answer("False")
+        self.feedback(answer)
+
+    def feedback(self, answer):
+        if answer:
+            self.canvas.config(bg="green")
+        else:
+            self.canvas.config(bg="red")
+        self.window.after(1000, self.get_next_question)
