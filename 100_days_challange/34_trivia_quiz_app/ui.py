@@ -41,6 +41,7 @@ class UI:
             self.canvas.itemconfig(self.question, text="END")
             self.agree_btn.config(state="disabled")
             self.disagree_btn.config(state="disabled")
+
     def good_answer(self):
         answer = self.quiz.check_answer("True")
         self.feedback(answer)
