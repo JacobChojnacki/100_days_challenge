@@ -4,6 +4,12 @@ from flight_search import FlightSearch
 from datetime import datetime, timedelta
 from notification_manager import NotificationManager
 
+
+def hello():
+    print("Welcome to Jacob's Flight Club\n"
+          "We find the best flight deals and email you.")
+
+
 data_manager = DataManager()
 flight_data = data_manager.get_data_from_sheet()
 flight_search = FlightSearch()
@@ -18,6 +24,10 @@ if flight_data[0]["iataCode"] == "":
 
 tomorrow = datetime.now() + timedelta(days=1)
 six_month_from_now = datetime.now() + timedelta(days=(6 * 30))
+
+data_manager.get_users_from_sheet()
+hello()
+data_manager.add_user()
 
 for place in flight_data:
     flight = flight_search.search_flight(

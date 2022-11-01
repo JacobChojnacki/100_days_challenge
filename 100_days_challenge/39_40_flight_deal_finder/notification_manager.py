@@ -13,3 +13,8 @@ class NotificationManager():
             (body=message,
              from_="",
              to="")
+
+    def send_emails(self):
+        # send emails
+        # I don't want to create own email
+        pass
