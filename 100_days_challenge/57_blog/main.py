@@ -12,7 +12,7 @@ for post in posts:
 
 @app.route('/')
 def home():
-    return render_template("index.html", postDemo=post_demo_objects)
+    return render_template("index.html", posts=post_demo_objects)
 
 
 @app.route('/post/<num>')
